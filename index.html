@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{ 'dark': darkMode }" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z Digital — Elevate Your Digital Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        myanmar: ['Noto Sans Myanmar', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 2s infinite',
+                        'float-slow': 'float 10s ease-in-out 4s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-in': 'slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'slide-out': 'slideOut 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'mesh': 'mesh 20s ease-in-out infinite',
+                        'mesh2': 'mesh2 25s ease-in-out infinite',
+                        'mesh3': 'mesh3 30s ease-in-out infinite',
+                        'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'bounce-slow': 'bounce 3s ease-in-out infinite',
+                        'orbit': 'orbit 15s linear infinite',
+                        'orbit-reverse': 'orbit 20s linear infinite reverse',
+                        'float-icon': 'floatIcon 8s ease-in-out infinite',
+                        'float-icon-2': 'floatIcon 10s ease-in-out 2s infinite',
+                        'float-icon-3': 'floatIcon 12s ease-in-out 4s infinite',
+                        'scale-pulse': 'scalePulse 4s ease-in-out infinite',
+                        'typing': 'typing 3.5s steps(40, end)',
+                        'blink': 'blink 1s step-end infinite',
+                        'pop-in': 'popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                        'shake': 'shake 0.5s ease-in-out',
+                        'confetti': 'confetti 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-20px) rotate(2deg)' },
+                            '66%': { transform: 'translateY(-10px) rotate(-1deg)' },
+                        },
+                        floatIcon: {
+                            '0%, 100%': { transform: 'translateY(0px) translateX(0px) rotate(0deg)' },
+                            '25%': { transform: 'translateY(-15px) translateX(10px) rotate(5deg)' },
+                            '50%': { transform: 'translateY(-25px) translateX(-5px) rotate(-3deg)' },
+                            '75%': { transform: 'translateY(-10px) translateX(-10px) rotate(3deg)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)' },
+                            '100%': { boxShadow: '0 0 40px rgba(99, 102, 241, 0.6), 0 0 80px rgba(99, 102, 241, 0.2)' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(120%)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideOut: {
+                            '0%': { transform: 'translateX(0)', opacity: '1' },
+                            '100%': { transform: 'translateX(120%)', opacity: '0' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        mesh: {
+                            '0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+                            '25%': { transform: 'translate(10%, -15%) scale(1.1)' },
+                            '50%': { transform: 'translate(-5%, 10%) scale(0.95)' },
+                            '75%': { transform: 'translate(-10%, -5%) scale(1.05)' },
+                        },
+                        mesh2: {
+                            '0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+                            '25%': { transform: 'translate(-15%, 10%) scale(1.05)' },
+                            '50%': { transform: 'translate(10%, -10%) scale(1.1)' },
+                            '75%': { transform: 'translate(5%, 15%) scale(0.95)' },
+                        },
+                        mesh3: {
+                            '0%, 100%': { transform: 'translate(0%, 0%) scale(1.05)' },
+                            '25%': { transform: 'translate(5%, 10%) scale(1)' },
+                            '50%': { transform: 'translate(-10%, 5%) scale(1.1)' },
+                            '75%': { transform: 'translate(10%, -10%) scale(0.95)' },
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '1' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        },
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg) translateX(120px) rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg) translateX(120px) rotate(-360deg)' },
+                        },
+                        scalePulse: {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+                            '50%': { transform: 'scale(1.1)', opacity: '1' },
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' },
+                        },
+                        blink: {
+                            'from, to': { borderColor: 'transparent' },
+                            '50%': { borderColor: 'currentColor' },
+                        },
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '25%': { transform: 'translateX(-5px)' },
+                            '75%': { transform: 'translateX(5px)' },
+                        },
+                        confetti: {
+                            '0%': { transform: 'translateY(0) rotate(0deg)', opacity: '1' },
+                            '100%': { transform: 'translateY(100px) rotate(720deg)', opacity: '0' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .dark .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+        
+        .mesh-gradient {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .dark .mesh-gradient {
+            opacity: 0.3;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-glow:hover::before {
+            left: 100%;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        .dark .nav-blur {
+            background: rgba(15, 15, 25, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.75);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.5);
+        }
+
+        .product-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .toggle-track {
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-thumb {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: currentColor;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Floating icons */
+        .floating-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Modal backdrop blur */
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Video container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+        }
+
+        /* Confetti styles */
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* Popup glow effect */
+        .popup-glow {
+            box-shadow: 0 0 100px rgba(99, 102, 241, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .dark .popup-glow {
+            box-shadow: 0 0 100px rgba(99, 102, 241, 0.2), 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Social button styles */
+        .social-btn-telegram {
+            background: linear-gradient(135deg, #0088cc, #00a8e8);
+        }
+        .social-btn-viber {
+            background: linear-gradient(135deg, #665CAC, #8B5CF6);
+        }
+        .social-btn-messenger {
+            background: linear-gradient(135deg, #0084ff, #00c6ff);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 dark:bg-[#0a0a14] text-gray-900 dark:text-gray-100 transition-colors duration-500 overflow-x-hidden" :class="lang === 'mm' ? 'font-myanmar' : 'font-inter'">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur" x-data="{ mobileOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/25">
+                        <span class="text-white font-bold text-lg">Z</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">
+                        <span class="text-gradient">Z</span> Digital
+                    </span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#products" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300" x-text="lang === 'en' ? 'Products' : 'ထုတ်ကုန်များ'"></a>
+                    <a href="#posts" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300" x-text="lang === 'en' ? 'News' : 'သတင်းများ'"></a>
+                    <a href="#how-it-works" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300" x-text="lang === 'en' ? 'How It Works' : 'ဝယ်ယူနည်း'"></a>
+                    <a href="#" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300" x-text="lang === 'en' ? 'Support' : 'အကူအညီ'"></a>
+                </div>
+
+                <!-- Right Controls -->
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <!-- Language Toggle -->
+                    <button @click="toggleLang()" class="relative flex items-center h-9 px-3 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10 text-xs font-semibold transition-all duration-300 hover:bg-gray-200 dark:hover:bg-white/15">
+                        <span class="transition-all duration-300" :class="lang === 'en' ? 'text-brand-600 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'">EN</span>
+                        <span class="mx-1.5 text-gray-300 dark:text-gray-600">/</span>
+                        <span class="transition-all duration-300" :class="lang === 'mm' ? 'text-brand-600 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'">MM</span>
+                    </button>
+
+                    <!-- Dark Mode Toggle -->
+                    <button @click="toggleDark()" class="relative w-9 h-9 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-gray-200 dark:hover:bg-white/15 hover:scale-110">
+                        <!-- Sun -->
+                        <svg x-show="darkMode" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 rotate-90 scale-50" x-transition:enter-end="opacity-100 rotate-0 scale-100" class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <!-- Moon -->
+                        <svg x-show="!darkMode" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -rotate-90 scale-50" x-transition:enter-end="opacity-100 rotate-0 scale-100" class="w-4 h-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button @click="mobileOpen = !mobileOpen" class="md:hidden w-9 h-9 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10 flex items-center justify-center transition-all duration-300">
+                        <svg x-show="!mobileOpen" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                        <svg x-show="mobileOpen" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="md:hidden pb-4" x-cloak>
+                <div class="space-y-1 pt-2">
+                    <a href="#products" @click="mobileOpen = false" class="block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all" x-text="lang === 'en' ? 'Products' : 'ထုတ်ကုန်များ'"></a>
+                    <a href="#posts" @click="mobileOpen = false" class="block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all" x-text="lang === 'en' ? 'News' : 'သတင်းများ'"></a>
+                    <a href="#how-it-works" @click="mobileOpen = false" class="block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all" x-text="lang === 'en' ? 'How It Works' : 'ဝယ်ယူနည်း'"></a>
+                    <a href="#" class="block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all" x-text="lang === 'en' ? 'Support' : 'အကူအညီ'"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Mesh Gradient Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="mesh-gradient w-[500px] h-[500px] bg-brand-400/30 dark:bg-brand-500/20 top-[-10%] left-[-5%] animate-mesh"></div>
+            <div class="mesh-gradient w-[600px] h-[600px] bg-purple-400/25 dark:bg-purple-500/15 top-[20%] right-[-10%] animate-mesh2"></div>
+            <div class="mesh-gradient w-[400px] h-[400px] bg-cyan-400/20 dark:bg-cyan-500/10 bottom-[-5%] left-[30%] animate-mesh3"></div>
+            <div class="mesh-gradient w-[350px] h-[350px] bg-pink-400/15 dark:bg-pink-500/10 top-[50%] left-[10%] animate-mesh2"></div>
+        </div>
+
+        <!-- Floating Digital Product Icons -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <!-- Netflix Icon -->
+            <div class="floating-icon w-16 h-16 sm:w-20 sm:h-20 top-[15%] left-[5%] sm:left-[10%] bg-red-500/10 dark:bg-red-500/20 border border-red-500/20 animate-float-icon">
+                <span class="text-red-500 font-black text-2xl sm:text-3xl">N</span>
+            </div>
+            
+            <!-- Telegram Icon -->
+            <div class="floating-icon w-14 h-14 sm:w-16 sm:h-16 top-[25%] right-[8%] sm:right-[12%] bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 animate-float-icon-2">
+                <i class="fa-brands fa-telegram text-blue-500 text-xl sm:text-2xl"></i>
+            </div>
+            
+            <!-- Diamond Icon -->
+            <div class="floating-icon w-12 h-12 sm:w-14 sm:h-14 top-[55%] left-[3%] sm:left-[8%] bg-yellow-500/10 dark:bg-yellow-500/20 border border-yellow-500/20 animate-float-icon-3">
+                <i class="fa-solid fa-gem text-yellow-500 text-lg sm:text-xl"></i>
+            </div>
+            
+            <!-- iTunes Icon -->
+            <div class="floating-icon w-14 h-14 sm:w-18 sm:h-18 bottom-[25%] right-[5%] sm:right-[10%] bg-pink-500/10 dark:bg-pink-500/20 border border-pink-500/20 animate-float-icon">
+                <i class="fa-brands fa-apple text-pink-500 text-xl sm:text-2xl"></i>
+            </div>
+            
+            <!-- PUBG Icon -->
+            <div class="floating-icon w-12 h-12 sm:w-14 sm:h-14 top-[40%] right-[20%] sm:right-[25%] bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 animate-float-icon-2">
+                <i class="fa-solid fa-crosshairs text-green-500 text-lg sm:text-xl"></i>
+            </div>
+            
+            <!-- Gift Card Icon -->
+            <div class="floating-icon w-14 h-14 sm:w-16 sm:h-16 bottom-[35%] left-[15%] sm:left-[20%] bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/20 animate-float-icon-3">
+                <i class="fa-solid fa-gift text-purple-500 text-xl sm:text-2xl"></i>
+            </div>
+
+            <!-- Game Controller -->
+            <div class="floating-icon w-10 h-10 sm:w-12 sm:h-12 top-[70%] right-[35%] bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/20 animate-float-icon">
+                <i class="fa-solid fa-gamepad text-indigo-500 text-sm sm:text-lg"></i>
+            </div>
+
+            <!-- Credit Card -->
+            <div class="floating-icon w-12 h-12 sm:w-14 sm:h-14 top-[10%] right-[35%] bg-cyan-500/10 dark:bg-cyan-500/20 border border-cyan-500/20 animate-float-icon-2">
+                <i class="fa-solid fa-credit-card text-cyan-500 text-lg sm:text-xl"></i>
+            </div>
+        </div>
+
+        <!-- Floating Glass Circles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-[15%] left-[10%] w-20 h-20 rounded-full glass animate-float opacity-40"></div>
+            <div class="absolute top-[25%] right-[15%] w-32 h-32 rounded-full glass animate-float-delayed opacity-30"></div>
+            <div class="absolute bottom-[20%] left-[20%] w-24 h-24 rounded-full glass animate-float-slow opacity-35"></div>
+            <div class="absolute top-[60%] right-[25%] w-16 h-16 rounded-full glass animate-float opacity-25"></div>
+            <div class="absolute top-[40%] left-[50%] w-12 h-12 rounded-full glass animate-float-delayed opacity-20"></div>
+            <div class="absolute bottom-[30%] right-[10%] w-28 h-28 rounded-full glass animate-float-slow opacity-20"></div>
+        </div>
+
+        <!-- Subtle dot pattern -->
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="animate-fade-in-up inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-brand-50 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/20 mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                </span>
+                <span class="text-xs sm:text-sm font-medium text-brand-700 dark:text-brand-300" x-text="lang === 'en' ? 'Trusted by 50,000+ users in Myanmar' : 'မြန်မာနိုင်ငံရှိ အသုံးပြုသူ ၅၀,၀၀၀+ က ယုံကြည်ထား'"></span>
+            </div>
+
+            <!-- Headline with Typing Effect -->
+            <h1 class="animate-fade-in-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6" style="animation-delay: 0.1s">
+                <span x-show="lang === 'en'">
+                    Elevate Your<br>
+                    <span class="text-gradient inline-flex items-center">
+                        <span x-text="typedText"></span>
+                        <span class="typing-cursor" x-show="showCursor"></span>
+                    </span>
+                </span>
+                <span x-show="lang === 'mm'" class="font-myanmar">
+                    သင်၏ Digital<br>
+                    <span class="text-gradient">လိုအပ်ချက်များကို</span><br>
+                    <span class="text-gradient">တစ်နေရာတည်းမှာ</span>
+                </span>
+            </h1>
+
+            <!-- Sub-headline -->
+            <p class="animate-fade-in-up max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed" style="animation-delay: 0.2s">
+                <span x-show="lang === 'en'">
+                    Premium subscriptions, game diamonds, and gift cards — <br class="hidden sm:block">
+                    Netflix, Mobile Legends, PUBG, iTunes & more. Instant delivery.
+                </span>
+                <span x-show="lang === 'mm'" class="font-myanmar">
+                    Premium subscription များ၊ ဂိမ်းစိန်များနှင့် Gift Card များ —<br class="hidden sm:block">
+                    Netflix, Mobile Legends, PUBG, iTunes နှင့် အခြားများစွာ။ ချက်ချင်း ရရှိပါမည်။
+                </span>
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="animate-fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4" style="animation-delay: 0.3s">
+                <a href="#products" class="btn-glow group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold rounded-2xl shadow-xl shadow-brand-500/25 hover:shadow-2xl hover:shadow-brand-500/40 transform hover:scale-105 transition-all duration-300 animate-glow">
+                    <span x-text="lang === 'en' ? 'Browse Store' : 'စတိုးဆိုင်ကို ကြည့်ရန်'"></span>
+                    <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+                <button @click="showVideoModal = true" class="group inline-flex items-center px-8 py-4 bg-white/80 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-semibold rounded-2xl hover:bg-gray-50 dark:hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-gray-200/50 dark:shadow-none">
+                    <svg class="mr-2 w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span x-text="lang === 'en' ? 'How It Works' : 'ဝယ်ယူနည်း'"></span>
+                </button>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="animate-fade-in-up mt-16 flex flex-wrap items-center justify-center gap-8 text-gray-400 dark:text-gray-500" style="animation-delay: 0.4s">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-medium" x-text="lang === 'en' ? 'Instant Delivery' : 'ချက်ချင်း ပေးပို့'"></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-medium" x-text="lang === 'en' ? '24/7 Support' : '၂၄/၇ ပံ့ပိုးမှု'"></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-medium" x-text="lang === 'en' ? 'Secure Payments' : 'လုံခြုံသော ငွေပေးချေမှု'"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Products Section - Bento Grid -->
+    <section id="products" class="relative py-20 sm:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4" x-text="lang === 'en' ? 'Our Products' : 'ကျွန်ုပ်တို့၏ ထုတ်ကုန်များ'"></span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                    <span x-show="lang === 'en'">Everything You <span class="text-gradient">Need</span></span>
+                    <span x-show="lang === 'mm'" class="font-myanmar">သင်လိုအပ်သမျှ <span class="text-gradient">အားလုံး</span></span>
+                </h2>
+                <p class="max-w-xl mx-auto text-gray-500 dark:text-gray-400 text-base sm:text-lg">
+                    <span x-show="lang === 'en'">Premium digital products at the best prices, delivered instantly.</span>
+                    <span x-show="lang === 'mm'" class="font-myanmar">အကောင်းဆုံး စျေးနှုန်းဖြင့် ပရီမီယံ ဒစ်ဂျစ်တယ် ထုတ်ကုန်များ။</span>
+                </p>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[300px]">
+
+                <!-- Telegram Premium - Large Card -->
+                <div class="sm:col-span-2 lg:row-span-2 glass-card rounded-3xl overflow-hidden product-card-hover relative group cursor-pointer">
+                    <!-- Product Image -->
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=800&auto=format&fit=crop&q=80" alt="Telegram Premium" class="w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#0a0a14] dark:via-[#0a0a14]/80"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between p-6 sm:p-8">
+                        <div>
+                            <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold mb-4">
+                                <span x-text="lang === 'en' ? 'Most Popular' : 'ရေပန်းအစားဆုံး'"></span>
+                            </div>
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-brands fa-telegram text-white text-3xl sm:text-4xl"></i>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2">Telegram Premium</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                                <span x-show="lang === 'en'">Unlock exclusive features — doubled limits, 4GB uploads, no ads, premium stickers & more.</span>
+                                <span x-show="lang === 'mm'" class="font-myanmar">သီးသန့် feature များ — ကန့်သတ်ချက် နှစ်ဆ၊ 4GB upload၊ ကြော်ငြာမပါ။</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6">
+                            <div>
+                                <span class="text-xs text-gray-400 dark:text-gray-500" x-text="lang === 'en' ? 'Starting from' : 'စတင်စျေးနှုန်း'"></span>
+                                <p class="text-2xl font-bold text-gradient">5,500 <span class="text-sm font-normal text-gray-400">MMK</span></p>
+                            </div>
+                            <button @click.stop="openBuyModal('Telegram Premium', '5,500 MMK')" class="px-5 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 hover:shadow-xl hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300">
+                                <span x-text="lang === 'en' ? 'Buy Now' : 'ဝယ်မယ်'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- iTunes Gift Card -->
+                <div class="glass-card rounded-3xl overflow-hidden product-card-hover relative group cursor-pointer">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=80" alt="iTunes" class="w-full h-full object-cover opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-[#0a0a14] dark:via-[#0a0a14]/90"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-rose-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center mb-4 shadow-lg shadow-pink-500/25 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-brands fa-apple text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">iTunes Gift Card</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                <span x-show="lang === 'en'">US, UK & more regions</span>
+                                <span x-show="lang === 'mm'" class="font-myanmar">US, UK နှင့် အခြား</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-bold text-gradient">$10 - $100</p>
+                            <button @click.stop="openBuyModal('iTunes Gift Card', '$10 - $100')" class="px-4 py-2 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300">
+                                <span x-text="lang === 'en' ? 'Buy' : 'ဝယ်မယ်'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Netflix -->
+                <div class="glass-card rounded-3xl overflow-hidden product-card-hover relative group cursor-pointer">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&auto=format&fit=crop&q=80" alt="Netflix" class="w-full h-full object-cover opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-[#0a0a14] dark:via-[#0a0a14]/90"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-400/20 to-red-600/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center mb-4 shadow-lg shadow-red-500/25 group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-white font-black text-lg">N</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">Netflix</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                <span x-show="lang === 'en'">Premium & Standard plans</span>
+                                <span x-show="lang === 'mm'" class="font-myanmar">Premium & Standard</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-bold text-gradient">3,500 <span class="text-xs font-normal text-gray-400">MMK</span></p>
+                            <button @click.stop="openBuyModal('Netflix', '3,500 MMK')" class="px-4 py-2 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300">
+                                <span x-text="lang === 'en' ? 'Buy' : 'ဝယ်မယ်'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Legends Diamonds -->
+                <div class="glass-card rounded-3xl overflow-hidden product-card-hover relative group cursor-pointer">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80" alt="Mobile Legends" class="w-full h-full object-cover opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-[#0a0a14] dark:via-[#0a0a14]/90"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center mb-4 shadow-lg shadow-yellow-500/25 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-gem text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">ML Diamonds</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                <span x-show="lang === 'en'">Mobile Legends: Bang Bang</span>
+                                <span x-show="lang === 'mm'" class="font-myanmar">Mobile Legends: Bang Bang</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-bold text-gradient">1,200 <span class="text-xs font-normal text-gray-400">MMK</span></p>
+                            <button @click.stop="openBuyModal('ML Diamonds', '1,200 MMK')" class="px-4 py-2 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300">
+                                <span x-text="lang === 'en' ? 'Buy' : 'ဝယ်မယ်'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PUBG UC -->
+                <div class="glass-card rounded-3xl overflow-hidden product-card-hover relative group cursor-pointer">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80" alt="PUBG" class="w-full h-full object-cover opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-[#0a0a14] dark:via-[#0a0a14]/90"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-400/20 to-green-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/25 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-crosshairs text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">PUBG UC</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                <span x-show="lang === 'en'">Unknown Cash top-up</span>
+                                <span x-show="lang === 'mm'" class="font-myanmar">UC ဖြည့်သွင်းခြင်း</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-bold text-gradient">2,000 <span class="text-xs font-normal text-gray-400">MMK</span></p>
+                            <button @click.stop="openBuyModal('PUBG UC', '2,000 MMK')" class="px-4 py-2 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300">
+                                <span x-text="lang === 'en' ? 'Buy' : 'ဝယ်မယ်'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Products CTA -->
+                <div class="glass-card rounded-3xl p-6 product-card-hover relative overflow-hidden group cursor-pointer border-2 border-dashed !border-brand-200 dark:!border-brand-500/20 !bg-brand-50/50 dark:!bg-brand-500/5">
+                    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-brand-100 dark:bg-brand-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-600 dark:text-brand-400 mb-1" x-text="lang === 'en' ? 'View All Products' : 'ထုတ်ကုန်များ အားလုံး'"></h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? '20+ products available' : 'ထုတ်ကုန် ၂၀+ ရနိုင်'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">50K+</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? 'Happy Users' : 'ပျော်ရွှင်သော သုံးစွဲသူ'"></p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">200K+</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? 'Orders Completed' : 'အော်ဒါ ပြီးဆုံး'"></p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">99.9%</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? 'Uptime' : 'လည်ပတ်ချိန်'"></p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">< 1min</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? 'Delivery Time' : 'ပေးပို့ချိန်'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4" x-text="lang === 'en' ? 'How It Works' : 'ဘယ်လိုလုပ်ဆောင်ရမလဲ'"></span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                    <span x-show="lang === 'en'">Simple as <span class="text-gradient">1-2-3</span></span>
+                    <span x-show="lang === 'mm'" class="font-myanmar"><span class="text-gradient">လွယ်ကူ</span>သော အဆင့်များ</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+                <!-- Step 1 -->
+                <div class="glass-card rounded-3xl p-8 text-center product-card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-100 dark:bg-brand-500/10 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-brand-600 dark:text-brand-400">1</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" x-text="lang === 'en' ? 'Choose Product' : 'ထုတ်ကုန် ရွေးချယ်ရန်'"></h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        <span x-show="lang === 'en'">Browse our wide selection of digital products and subscriptions.</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">ကျွန်ုပ်တို့၏ ဒစ်ဂျစ်တယ် ထုတ်ကုန်များကို ရွေးချယ်ပါ။</span>
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card rounded-3xl p-8 text-center product-card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-100 dark:bg-brand-500/10 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-brand-600 dark:text-brand-400">2</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" x-text="lang === 'en' ? 'Make Payment' : 'ငွေပေးချေရန်'"></h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        <span x-show="lang === 'en'">Pay securely with KBZ Pay, WavePay, or KBZ Banking.</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">KBZ Pay, WavePay သို့မဟုတ် KBZ Banking ဖြင့် ငွေပေးချေပါ။</span>
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card rounded-3xl p-8 text-center product-card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-100 dark:bg-brand-500/10 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-brand-600 dark:text-brand-400">3</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" x-text="lang === 'en' ? 'Instant Delivery' : 'ချက်ချင်း ရရှိ'"></h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        <span x-show="lang === 'en'">Receive your product instantly via email or direct activation.</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">အီးမေးလ် သို့မဟုတ် တိုက်ရိုက် ချက်ချင်း ရရှိမည်။</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Watch Video Button -->
+            <div class="text-center">
+                <button @click="showVideoModal = true" class="inline-flex items-center px-6 py-3 bg-brand-500/10 dark:bg-brand-500/20 text-brand-600 dark:text-brand-400 font-semibold rounded-2xl hover:bg-brand-500 hover:text-white transition-all duration-300 group">
+                    <svg class="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span x-text="lang === 'en' ? 'Watch Tutorial Video' : 'ဗီဒီယို ကြည့်ရန်'"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News/Posts Section -->
+    <section id="posts" class="py-16 sm:py-24 bg-gray-100/50 dark:bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12">
+                <div>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4" x-text="lang === 'en' ? 'Latest Updates' : 'နောက်ဆုံးရ သတင်းများ'"></span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        <span x-show="lang === 'en'">News & <span class="text-gradient">Promotions</span></span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">သတင်းနှင့် <span class="text-gradient">ပရိုမိုးရှင်း</span></span>
+                    </h2>
+                </div>
+                <a href="#" class="mt-4 sm:mt-0 inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:underline">
+                    <span x-text="lang === 'en' ? 'View All' : 'အားလုံး ကြည့်ရန်'"></span>
+                    <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Post 1 -->
+                <article class="glass-card rounded-3xl overflow-hidden product-card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&auto=format&fit=crop&q=80" alt="Post" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded-full bg-green-500 text-white text-xs font-semibold" x-text="lang === 'en' ? 'New' : 'အသစ်'"></span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 text-xs text-gray-400 mb-3">
+                            <span>Jan 15, 2026</span>
+                            <span>•</span>
+                            <span x-text="lang === 'en' ? 'Promotion' : 'ပရိုမိုးရှင်း'"></span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-brand-500 transition-colors">
+                            <span x-show="lang === 'en'">Telegram Premium 20% Off This Week!</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">ဒီအပတ် Telegram Premium ၂၀% လျှော့စျေး!</span>
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                            <span x-show="lang === 'en'">Get Telegram Premium at a discounted price. Limited time offer!</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">Telegram Premium ကို လျှော့စျေးဖြင့် ရယူပါ။ အချိန်ကန့်သတ်!</span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="glass-card rounded-3xl overflow-hidden product-card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600&auto=format&fit=crop&q=80" alt="Post" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded-full bg-yellow-500 text-white text-xs font-semibold" x-text="lang === 'en' ? 'Hot' : 'ဟော့'"></span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 text-xs text-gray-400 mb-3">
+                            <span>Jan 12, 2026</span>
+                            <span>•</span>
+                            <span x-text="lang === 'en' ? 'Gaming' : 'ဂိမ်း'"></span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-brand-500 transition-colors">
+                            <span x-show="lang === 'en'">MLBB New Season Diamond Bonus</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">MLBB Season အသစ် Diamond Bonus</span>
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                            <span x-show="lang === 'en'">Buy diamonds now and get extra bonus diamonds for the new season.</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">Season အသစ်အတွက် Diamond ဝယ်ယူပြီး Bonus ရယူပါ။</span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="glass-card rounded-3xl overflow-hidden product-card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&auto=format&fit=crop&q=80" alt="Post" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded-full bg-blue-500 text-white text-xs font-semibold" x-text="lang === 'en' ? 'Tips' : 'အကြံပြု'"></span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 text-xs text-gray-400 mb-3">
+                            <span>Jan 10, 2026</span>
+                            <span>•</span>
+                            <span x-text="lang === 'en' ? 'Guide' : 'လမ်းညွှန်'"></span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-brand-500 transition-colors">
+                            <span x-show="lang === 'en'">How to Redeem iTunes Gift Card</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">iTunes Gift Card သုံးနည်း</span>
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                            <span x-show="lang === 'en'">Step-by-step guide on how to redeem your iTunes gift card.</span>
+                            <span x-show="lang === 'mm'" class="font-myanmar">iTunes Gift Card ကို အဆင့်ဆင့် သုံးနည်း လမ်းညွှန်။</span>
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative border-t border-gray-200 dark:border-white/5 bg-white/50 dark:bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+                <!-- Brand Column -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/25">
+                            <span class="text-white font-bold text-lg">Z</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight">
+                            <span class="text-gradient">Z</span> Digital
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                        <span x-show="lang === 'en'">Your trusted digital marketplace in Myanmar. Premium products, instant delivery, 24/7 support.</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">မြန်မာနိုင်ငံ၏ ယုံကြည်ရသော ဒစ်ဂျစ်တယ် စျေးကွက်။ ပရီမီယံ ထုတ်ကုန်များ၊ ချက်ချင်း ပေးပို့မှု။</span>
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex items-center space-x-3">
+                        <a href="#" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300 hover:scale-110">
+                            <i class="fa-brands fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300 hover:scale-110">
+                            <i class="fa-brands fa-telegram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300 hover:scale-110">
+                            <i class="fa-brands fa-viber text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300 hover:scale-110">
+                            <i class="fa-brands fa-tiktok text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-gray-100 mb-6" x-text="lang === 'en' ? 'Quick Links' : 'အမြန်လင့်ခ်များ'"></h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'All Products' : 'ထုတ်ကုန်အားလုံး'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Game Top-up' : 'ဂိမ်းဖြည့်ရန်'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Gift Cards' : 'Gift Card များ'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Subscriptions' : 'Subscription များ'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'FAQ' : 'မေးလေ့ရှိသော မေးခွန်းများ'"></a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-gray-100 mb-6" x-text="lang === 'en' ? 'Support' : 'ပံ့ပိုးမှု'"></h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Help Center' : 'အကူအညီစင်တာ'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Contact Us' : 'ဆက်သွယ်ရန်'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Privacy Policy' : 'ကိုယ်ရေးအချက်အလက်မူဝါဒ'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Terms of Service' : 'ဝန်ဆောင်မှုစည်းကမ်း'"></a></li>
+                        <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors" x-text="lang === 'en' ? 'Refund Policy' : 'ပြန်အမ်းငွေ မူဝါဒ'"></a></li>
+                    </ul>
+                </div>
+
+                <!-- Payment Methods -->
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-gray-100 mb-6" x-text="lang === 'en' ? 'Payment Methods' : 'ငွေပေးချေမှု နည်းလမ်းများ'"></h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                            <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xs font-bold">KBZ</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">KBZ Pay</p>
+                                <p class="text-xs text-gray-400" x-text="lang === 'en' ? 'Mobile Payment' : 'မိုဘိုင်းငွေပေးချေ'"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-500 flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xs font-bold">W</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">WavePay</p>
+                                <p class="text-xs text-gray-400" x-text="lang === 'en' ? 'Mobile Payment' : 'မိုဘိုင်းငွေပေးချေ'"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                            <div class="w-10 h-10 rounded-lg bg-blue-800 flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xs font-bold">KB</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">KBZ Banking</p>
+                                <p class="text-xs text-gray-400" x-text="lang === 'en' ? 'Bank Transfer' : 'ဘဏ်ငွေလွှဲ'"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-gray-400 dark:text-gray-500">
+                    © 2026 Z Digital. <span x-text="lang === 'en' ? 'All rights reserved.' : 'မူပိုင်ခွင့် အားလုံးရယူထားသည်။'"></span>
+                </p>
+                <p class="text-xs text-gray-400 dark:text-gray-500 flex items-center space-x-1">
+                    <span x-text="lang === 'en' ? 'Made with' : 'ဖန်တီးထားသည်'"></span>
+                    <svg class="w-3 h-3 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span x-text="lang === 'en' ? 'in Myanmar' : 'မြန်မာနိုင်ငံတွင်'"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Welcome Discount Popup Modal -->
+    <div x-show="showPromoPopup" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop bg-black/50" @click.self="showPromoPopup = false" x-cloak>
+        <div x-show="showPromoPopup" x-transition:enter="transition ease-out duration-400" x-transition:enter-start="opacity-0 scale-90 translate-y-8" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="relative w-full max-w-md">
+            
+            <!-- Confetti Animation -->
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none" x-show="showConfetti">
+                <template x-for="i in 20">
+                    <div class="confetti-piece absolute animate-confetti" :style="'left: ' + (Math.random() * 200 - 100) + 'px; background: ' + ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'][Math.floor(Math.random() * 5)] + '; animation-delay: ' + (Math.random() * 0.5) + 's; animation-duration: ' + (1 + Math.random()) + 's;'"></div>
+                </template>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 text-center popup-glow relative overflow-hidden">
+                <!-- Close Button -->
+                <button @click="showPromoPopup = false" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-brand-500/20 to-purple-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <!-- Gift Icon with Animation -->
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center shadow-xl shadow-brand-500/30 animate-bounce-slow">
+                        <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Headline -->
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-2">
+                        <span x-show="lang === 'en'">🎉 Welcome Gift!</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">🎉 ကြိုဆိုလက်ဆောင်!</span>
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">
+                        <span x-show="lang === 'en'">Get <span class="text-brand-500 font-bold">10% OFF</span> your first purchase!</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">ပထမဆုံး ဝယ်ယူမှုအတွက် <span class="text-brand-500 font-bold">၁၀% လျှော့စျေး</span>!</span>
+                    </p>
+
+                    <!-- Promo Code Box -->
+                    <div class="bg-gradient-to-r from-brand-50 to-purple-50 dark:from-brand-500/10 dark:to-purple-500/10 rounded-2xl p-6 mb-6 border-2 border-dashed border-brand-200 dark:border-brand-500/30">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-2" x-text="lang === 'en' ? 'Use code at checkout:' : 'checkout တွင် ကုဒ်ကို အသုံးပြုပါ:'"></p>
+                        <div class="flex items-center justify-center space-x-3">
+                            <code class="text-2xl sm:text-3xl font-mono font-bold text-gradient tracking-widest">HELLO2026</code>
+                        </div>
+                    </div>
+
+                    <!-- Copy & Shop Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button @click="copyPromoCode()" class="flex-1 px-6 py-3 rounded-xl border-2 border-brand-200 dark:border-brand-500/30 text-brand-600 dark:text-brand-400 font-semibold hover:bg-brand-50 dark:hover:bg-brand-500/10 transition-all duration-300 flex items-center justify-center space-x-2">
+                            <svg x-show="!promoCopied" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
+                            <svg x-show="promoCopied" class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span x-text="promoCopied ? (lang === 'en' ? 'Copied!' : 'ကူးပြီး!') : (lang === 'en' ? 'Copy Code' : 'ကုဒ် ကူးရန်')"></span>
+                        </button>
+                        <a href="#products" @click="showPromoPopup = false" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                            <span x-text="lang === 'en' ? 'Shop Now' : 'ဈေးဝယ်မယ်'"></span>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Expiry Note -->
+                    <p class="mt-4 text-xs text-gray-400 dark:text-gray-500">
+                        <span x-show="lang === 'en'">⏰ Offer expires in 24 hours</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">⏰ ၂၄ နာရီအတွင်း သက်တမ်းကုန်ပါမည်</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div x-show="showVideoModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop bg-black/70" @click.self="showVideoModal = false; stopVideo()" x-cloak>
+        <div x-show="showVideoModal" x-transition:enter="transition ease-out duration-400" x-transition:enter-start="opacity-0 scale-95 translate-y-4" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative w-full max-w-4xl">
+            
+            <!-- Close Button -->
+            <button @click="showVideoModal = false; stopVideo()" class="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors flex items-center space-x-2">
+                <span class="text-sm" x-text="lang === 'en' ? 'Close' : 'ပိတ်ရန်'"></span>
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="glass-card rounded-3xl p-4 sm:p-6 popup-glow">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold" x-text="lang === 'en' ? 'How to Order' : 'မှာယူနည်း'"></h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400" x-text="lang === 'en' ? 'Watch this quick tutorial' : 'ဒီ Tutorial လေးကို ကြည့်ပါ'"></p>
+                </div>
+                <div class="video-container rounded-2xl overflow-hidden bg-black">
+                    <iframe id="tutorialVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" title="How to Order Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <span x-show="lang === 'en'">Still have questions? Contact us via:</span>
+                        <span x-show="lang === 'mm'" class="font-myanmar">မေးစရာရှိသေးလား? ဆက်သွယ်ပါ:</span>
+                    </p>
+                    <div class="flex items-center space-x-2">
+                        <a href="https://t.me/zdigital" target="_blank" class="w-10 h-10 rounded-xl social-btn-telegram flex items-center justify-center text-white hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-telegram text-lg"></i>
+                        </a>
+                        <a href="viber://chat?number=959123456789" target="_blank" class="w-10 h-10 rounded-xl social-btn-viber flex items-center justify-center text-white hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-viber text-lg"></i>
+                        </a>
+                        <a href="https://m.me/zdigital" target="_blank" class="w-10 h-10 rounded-xl social-btn-messenger flex items-center justify-center text-white hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-facebook-messenger text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Modal (Order via Social) -->
+    <div x-show="showBuyModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop bg-black/50" @click.self="showBuyModal = false" x-cloak>
+        <div x-show="showBuyModal" x-transition:enter="transition ease-out duration-400" x-transition:enter-start="opacity-0 scale-90 translate-y-8" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="relative w-full max-w-sm">
+            
+            <div class="glass-card rounded-3xl p-6 popup-glow relative overflow-hidden">
+                <!-- Close Button -->
+                <button @click="showBuyModal = false" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-cart-shopping text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1" x-text="lang === 'en' ? 'Order Now' : 'အော်ဒါမှာမယ်'"></h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <span x-text="selectedProduct.name"></span> — <span class="text-brand-500 font-semibold" x-text="selectedProduct.price"></span>
+                    </p>
+                </div>
+
+                <p class="text-sm text-center text-gray-500 dark:text-gray-400 mb-4" x-text="lang === 'en' ? 'Choose your preferred platform:' : 'သင်နှစ်သက်ရာကို ရွေးချယ်ပါ:'"></p>
+
+                <div class="space-y-3">
+                    <!-- Telegram -->
+                    <a :href="'https://t.me/zdigital?text=' + encodeURIComponent('Hi! I want to order ' + selectedProduct.name + ' (' + selectedProduct.price + ')')" target="_blank" class="flex items-center w-full p-4 rounded-2xl social-btn-telegram text-white hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fa-brands fa-telegram text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold">Telegram</p>
+                            <p class="text-xs text-white/70" x-text="lang === 'en' ? 'Fast response' : 'အမြန်တုံ့ပြန်'"></p>
+                        </div>
+                        <svg class="w-5 h-5 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+
+                    <!-- Viber -->
+                    <a :href="'viber://chat?number=959123456789'" target="_blank" class="flex items-center w-full p-4 rounded-2xl social-btn-viber text-white hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fa-brands fa-viber text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold">Viber</p>
+                            <p class="text-xs text-white/70" x-text="lang === 'en' ? 'Available 24/7' : '၂၄/၇ ရရှိနိုင်'"></p>
+                        </div>
+                        <svg class="w-5 h-5 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+
+                    <!-- Messenger -->
+                    <a :href="'https://m.me/zdigital?text=' + encodeURIComponent('Hi! I want to order ' + selectedProduct.name + ' (' + selectedProduct.price + ')')" target="_blank" class="flex items-center w-full p-4 rounded-2xl social-btn-messenger text-white hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fa-brands fa-facebook-messenger text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold">Messenger</p>
+                            <p class="text-xs text-white/70" x-text="lang === 'en' ? 'Easy & convenient' : 'လွယ်ကူသက်သာ'"></p>
+                        </div>
+                        <svg class="w-5 h-5 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <p class="mt-4 text-xs text-center text-gray-400 dark:text-gray-500">
+                    <span x-show="lang === 'en'">💬 Just click and start chatting!</span>
+                    <span x-show="lang === 'mm'" class="font-myanmar">💬 နှိပ်ပြီး စကားပြောလိုက်ပါ!</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function app() {
+            return {
+                darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
+                lang: 'en',
+                showPromoPopup: false,
+                showVideoModal: false,
+                showBuyModal: false,
+                promoCopied: false,
+                showConfetti: false,
+                selectedProduct: { name: '', price: '' },
+                
+                // Typing effect
+                typedText: '',
+                fullText: 'Digital Life',
+                showCursor: true,
+                typingIndex: 0,
+
+                init() {
+                    // Check saved preferences
+                    const savedDark = localStorage.getItem('zdigital_dark');
+                    const savedLang = localStorage.getItem('zdigital_lang');
+
+                    if (savedDark !== null) {
+                        this.darkMode = savedDark === 'true';
+                    }
+                    if (savedLang) {
+                        this.lang = savedLang;
+                    }
+
+                    // Start typing effect
+                    setTimeout(() => {
+                        this.startTyping();
+                    }, 500);
+
+                    // Show promo popup after delay
+                    const hasSeenPromo = sessionStorage.getItem('zdigital_promo_seen');
+                    if (!hasSeenPromo) {
+                        setTimeout(() => {
+                            this.showPromoPopup = true;
+                            this.showConfetti = true;
+                            setTimeout(() => {
+                                this.showConfetti = false;
+                            }, 2000);
+                        }, 2500);
+                    }
+                },
+
+                startTyping() {
+                    if (this.typingIndex < this.fullText.length) {
+                        this.typedText += this.fullText.charAt(this.typingIndex);
+                        this.typingIndex++;
+                        setTimeout(() => this.startTyping(), 100);
+                    } else {
+                        // Keep cursor blinking
+                        setTimeout(() => {
+                            this.showCursor = false;
+                        }, 3000);
+                    }
+                },
+
+                toggleDark() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('zdigital_dark', this.darkMode);
+                },
+
+                toggleLang() {
+                    this.lang = this.lang === 'en' ? 'mm' : 'en';
+                    localStorage.setItem('zdigital_lang', this.lang);
+                },
+
+                copyPromoCode() {
+                    navigator.clipboard.writeText('HELLO2026').then(() => {
+                        this.promoCopied = true;
+                        setTimeout(() => this.promoCopied = false, 2000);
+                    });
+                },
+
+                openBuyModal(name, price) {
+                    this.selectedProduct = { name, price };
+                    this.showBuyModal = true;
+                },
+
+                stopVideo() {
+                    const iframe = document.getElementById('tutorialVideo');
+                    if (iframe) {
+                        iframe.src = iframe.src;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
